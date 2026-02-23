@@ -1,4 +1,4 @@
-# News App - Route Flutter Course Assignment
+# News App
 
 A comprehensive Flutter application developed as part of the **Route Flutter Course**. This project demonstrates the implementation of a modern news application, integrating REST APIs, clean architecture principles, and a polished UI/UX.
 
@@ -11,6 +11,8 @@ A comprehensive Flutter application developed as part of the **Route Flutter Cou
 *   **Theming:** Support for Dark and Light modes.
 *   **Responsive UI:** Designed to look great on various screen sizes.
 *   **Splash Screen:** Custom branded splash screen with dark mode support.
+*   **Infinite Scrolling:** Seamlessly scroll through a large number of articles.
+*   **Webview:** Read the full article in a webview.
 
 ## 🛠️ Tech Stack & Libraries
 
@@ -18,10 +20,12 @@ A comprehensive Flutter application developed as part of the **Route Flutter Cou
 *   **Language:** [Dart](https://dart.dev/)
 *   **Network:** [http](https://pub.dev/packages/http) for API requests.
 *   **Image Loading:** [cached_network_image](https://pub.dev/packages/cached_network_image) for efficient image caching and loading.
-*   **Icons & Assets:** 
+*   **Icons & Assets:**
     *   [flutter_svg](https://pub.dev/packages/flutter_svg) for high-quality vector graphics.
     *   [flutter_gen](https://pub.dev/packages/flutter_gen) for type-safe asset management.
 *   **Animations:** [flutter_bounceable](https://pub.dev/packages/flutter_bounceable) for interactive UI elements.
+*   **Infinite Scrolling:** [infinite_scroll_pagination](https://pub.dev/packages/infinite_scroll_pagination) for easy implementation of infinite scrolling.
+*   **Webview:** [url_launcher](https://pub.dev/packages/url_launcher) to launch URLs in a webview.
 
 ## 📂 Project Structure
 
@@ -54,11 +58,7 @@ lib/
     ```bash
     flutter pub get
     ```
-4.  **Generate assets (if using flutter_gen):**
-    ```bash
-    dart run build_runner build
-    ```
-5.  **Run the application:**
+4.  **Run the application:**
     ```bash
     flutter run
     ```
@@ -67,6 +67,7 @@ lib/
 
 *   **Course:** Route Flutter Course
 *   **Task:** News Application Implementation
+*   **Design:** https://www.figma.com/design/7Fu4fU1aY1NprTqZ1f1Fvu/News?node-id=25-587&p=f&t=VD0MHVdtgu2E204T-0
 
 [//]: # (*   **Objective:** To practice API integration, state management &#40;inferred&#41;, and advanced UI components in Flutter.)
 
