@@ -29,7 +29,7 @@ class ArticleData {
       publishedAt: json["publishedAt"],
       content: json["content"],
       author: json["author"],
-      sourceId: json["source"]["id"],
+      sourceId: json["source"]["id"] ?? "",
       sourceName: json["source"]["name"],
     );
   }

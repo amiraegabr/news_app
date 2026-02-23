@@ -9,53 +9,79 @@ import 'package:news_app/network_handler/end_points.dart';
 class NetworkHandler {
   static Future<List<SourceData>> getAllSources(String categoryId) async {
     try {
-      Map<String, dynamic> queryParameters = {
-        "apiKey": ApiConstants.apiKey,
-        "category": categoryId,
-      };
-
       final response = await http.get(
-        Uri.https(ApiConstants.baseUrl, EndPoints.allSources, queryParameters),
+        Uri.https(ApiConstants.baseUrl, EndPoints.allSources, {
+          "apiKey": ApiConstants.apiKey,
+          "category": categoryId,
+        }),
       );
 
       if (response.statusCode == 200) {
         var data = jsonDecode(response.body);
-
-        SourceDataModel sourceDataModel = SourceDataModel.fromJson(data);
-
-        return sourceDataModel.sources;
+        return SourceDataModel.fromJson(data).sources;
       } else {
-        throw Exception("Something went Wrong");
+        throw Exception("Status ${response.statusCode}: ${response.body}");
       }
     } catch (e) {
-      throw Exception("Something went Wrong");
+      rethrow;
     }
   }
 
-  static Future<List<ArticleData>> getAllArticles(String sourceId) async {
+  static Future<List<ArticleData>> getAllArticles(
+    String sourceId, {
+    int page = 1,
+  }) async {
     try {
-      Map<String, dynamic> queryParameters = {
-        "apiKey": ApiConstants.apiKey,
-        "sources": sourceId,
-      };
-
       final response = await http.get(
-        Uri.https(ApiConstants.baseUrl, EndPoints.allArticles, queryParameters),
+        Uri.https(ApiConstants.baseUrl, EndPoints.allArticles, {
+          "apiKey": ApiConstants.apiKey,
+          "sources": sourceId,
+          "page": page.toString(),
+          "pageSize": "10",
+        }),
       );
-      List<ArticleData> articlesList = [];
+
       if (response.statusCode == 200) {
         var data = jsonDecode(response.body);
-
+        List<ArticleData> articlesList = [];
         for (var e in data["articles"]) {
-          ArticleData articleData = ArticleData.fromJson(e);
-          articlesList.add(articleData);
+          articlesList.add(ArticleData.fromJson(e));
         }
         return articlesList;
       } else {
-        throw Exception("Something went wrong!");
+        throw Exception("Status ${response.statusCode}: ${response.body}");
       }
     } catch (e) {
-      throw Exception("Something went wrong!");
+      rethrow;
+    }
+  }
+
+  static Future<List<ArticleData>> searchArticles(
+    String query, {
+    int page = 1,
+  }) async {
+    try {
+      final response = await http.get(
+        Uri.https(ApiConstants.baseUrl, EndPoints.allArticles, {
+          "apiKey": ApiConstants.apiKey,
+          "q": query,
+          "page": page.toString(),
+          "pageSize": "10",
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        var data = jsonDecode(response.body);
+        List<ArticleData> articlesList = [];
+        for (var e in data["articles"]) {
+          articlesList.add(ArticleData.fromJson(e));
+        }
+        return articlesList;
+      } else {
+        throw Exception("Status ${response.statusCode}: ${response.body}");
+      }
+    } catch (e) {
+      rethrow;
     }
   }
 }
